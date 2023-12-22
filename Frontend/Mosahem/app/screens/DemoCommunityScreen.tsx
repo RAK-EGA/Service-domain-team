@@ -1,10 +1,12 @@
 import React, { FC } from "react"
 import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-import { ListItem, Screen, Text } from "../components"
+import { Button, ListItem, Screen, Text } from "../components"
 import { DemoTabScreenProps } from "../navigators/DemoNavigator"
 import { spacing } from "../theme"
 import { openLinkInBrowser } from "../utils/openLinkInBrowser"
 import { isRTL } from "../i18n"
+import { useNavigation } from "@react-navigation/native"
+
 
 const chainReactLogo = require("../../assets/images/demo/cr-logo.png")
 const reactNativeLiveLogo = require("../../assets/images/demo/rnl-logo.png")
@@ -13,8 +15,17 @@ const reactNativeNewsletterLogo = require("../../assets/images/demo/rnn-logo.png
 
 export const DemoCommunityScreen: FC<DemoTabScreenProps<"DemoCommunity">> =
   function DemoCommunityScreen(_props) {
+    const navigation = useNavigation()
     return (
       <Screen preset="scroll" contentContainerStyle={$container} safeAreaEdges={["top"]}>
+        
+        <Button
+          text="Go to Ticket Submession"
+          onPress={() => navigation.navigate('TicketSubmession' as never)} 
+          style={$buttonStyle} // Add your button style here
+          textStyle={$buttonTextStyle} // Add your button text style here
+        />
+        
         <Text preset="heading" tx="demoCommunityScreen.title" style={$title} />
         <Text tx="demoCommunityScreen.tagLine" style={$tagline} />
 
@@ -131,4 +142,23 @@ const $logoContainer: ViewStyle = {
 const $logo: ImageStyle = {
   height: 38,
   width: 38,
+}
+
+const $buttonStyle: ViewStyle = {
+  backgroundColor: "#907A55",
+  borderRadius: 10,
+  width: "90%",
+  height: 50,
+  justifyContent: "center",
+  alignItems: "center",
+  marginLeft: 10,
+  marginTop: 20,
+}
+
+const $buttonTextStyle: TextStyle = {
+  color: "#FFFFFF",
+  fontSize: 16,
+  textAlign: "center",
+  justifyContent: "center",
+  alignItems: "center",
 }
